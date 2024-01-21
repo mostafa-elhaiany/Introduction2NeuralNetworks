@@ -1,5 +1,5 @@
 import streamlit as st
-from Content import ActivationFunctions
+from Content import ActivationFunctions, NetworkArchitecture
 
 def main():
     st.title("Introduction to Neural Networks")
@@ -10,6 +10,7 @@ def main():
     st.divider()
     
 
+    NetworkArchitecture.draw(st)
     st.divider()
 
 
