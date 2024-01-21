@@ -1,5 +1,5 @@
 import streamlit as st
-from Content import ActivationFunctions, NetworkArchitecture
+from Content import ActivationFunctions, NetworkArchitecture, Dataset
 
 def main():
     st.title("Introduction to Neural Networks")
@@ -13,7 +13,7 @@ def main():
     NetworkArchitecture.draw(st)
     st.divider()
 
-
+    Dataset.draw(st)
     st.divider()
 
 if __name__ == "__main__":
