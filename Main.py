@@ -1,14 +1,17 @@
 import streamlit as st
-
+from Content import ActivationFunctions
 
 def main():
     st.title("Introduction to Neural Networks")
     st.write("This Streamlit app is designed to be an educational and hands-on tool for individuals interested in Neural Networks. It provides an intuitive interface to experiment with mathematical functions, generate datasets, and observe how neural networks learn from and predict on different data patterns.")
     st.divider()
 
+    ActivationFunctions.draw(st)
     st.divider()
     
+
     st.divider()
+
 
     st.divider()
 
