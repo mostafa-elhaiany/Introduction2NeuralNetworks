@@ -3,14 +3,17 @@ from sklearn.datasets import make_regression, make_classification
 import numpy as np
 import time
 
-def generate_data(dataset_type, random_seed):
+def generate_data(dataset_type,random_seed, separation):
     np.random.seed(random_seed)
 
     if dataset_type == 'regression':
         X, y = make_regression(n_samples=np.random.randint(100,500), n_features=1, noise=np.random.randint(1,10))
         is_regression = True
     elif dataset_type == 'classification':
-        X, y = make_classification(n_samples=np.random.randint(100,500), n_features=2, n_informative=2, n_redundant=0,class_sep=np.random.randint(0,2))
+        if(separation is None):
+            X, y = make_classification(n_samples=np.random.randint(100,500), n_features=2, n_informative=2, n_redundant=0,class_sep=np.random.randint(0,2))
+        else:
+            X, y = make_classification(n_samples=np.random.randint(100,500), n_features=2, n_informative=2, n_redundant=0,class_sep=separation)
         is_regression = False
     else:
         raise ValueError("Invalid dataset type")
@@ -30,12 +33,11 @@ def plot_data(X, y, dataset_type):
     plt.grid(True)
     return figure
 
-def draw(st, seed=None):
+def draw(st, separation=None, seed=None):
     st.header("Dataset Generator")
     st.write("Now let's look at some dataset options, as we explained there are two types of problems we can look at")
     dataset_type = st.selectbox("Select dataset type", ['regression', 'classification'])
 
-    # X, y = generate_data(dataset_type)
     button = st.button("Generate Data")
     # Button to generate data
     if button:
@@ -48,9 +50,9 @@ def draw(st, seed=None):
             random_seed = seed
         else:
             random_seed = int(time.time())
-        X, y, is_regression = generate_data(dataset_type, random_seed)
+        X, y, is_regression = generate_data(dataset_type,random_seed, separation)
         figure = plot_data(X, y, dataset_type)
         st.pyplot(figure)
         return  X, y, is_regression
-    return generate_data(dataset_type, int(time.time()))
+    return generate_data(dataset_type, int(time.time()), separation )
 
